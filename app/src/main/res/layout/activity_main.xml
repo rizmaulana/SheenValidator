@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,7 +8,7 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
+    <android.support.v7.widget.Toolbar
             android:background="@color/colorPrimary"
             app:titleTextColor="#FFFFFF"
             app:title="@string/app_name"
@@ -88,4 +88,4 @@
     </LinearLayout>
 
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+</LinearLayout>

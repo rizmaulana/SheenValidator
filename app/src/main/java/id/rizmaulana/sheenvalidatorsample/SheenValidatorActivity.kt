@@ -1,8 +1,8 @@
 package id.rizmaulana.sheenvalidatorsample
 
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import id.rizmaulana.sheenvalidator.lib.SheenValidator
 import kotlinx.android.synthetic.main.activity_sheen_validator.*
 

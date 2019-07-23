@@ -1,9 +1,9 @@
 package id.rizmaulana.sheenvalidatorsample
 
 import android.os.Bundle
+import android.support.design.widget.TextInputEditText
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.textfield.TextInputEditText
 import id.rizmaulana.sheenvalidator.anotation.RegisterValidation
 import id.rizmaulana.sheenvalidator.anotation.ValidationBinder
 import id.rizmaulana.sheenvalidator.lib.SheenValidator
