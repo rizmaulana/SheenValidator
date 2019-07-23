@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SheenValidator</string>
+
+    <string name="err_form_required">%1$s is required</string>
+    <string name="err_form_email">%1$s is not valid email</string>
+    <string name="err_form_phone">%1$s is not valid phone number</string>
+    <string name="err_form_website">%1$s is not valid web address</string>
+
+
+
+</resources>
