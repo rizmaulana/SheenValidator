@@ -52,7 +52,7 @@ dependencies {
         }
     }
 ```
-You can register validation on any view which extends **TextView component**
+You can register validation on any view which extends **TextView component**. SheenValidator has default error message like Email is required, email is not valid, etc if you dont use errorListener, but if you want to custom error message you can do it like this ...
 
 ### Usage with Error Listener to custom Error
 
