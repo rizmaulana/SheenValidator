@@ -2,27 +2,29 @@
 
 Android library to make form validation easier, it is simple and lightweight library 100% write in Kotlin
 
+![alt text](https://i.pinimg.com/originals/1b/ef/f1/1beff152fc029b96028374dd2ab69010.png)
+
 ## Installation
 
 ```bash
 allprojects {
     repositories {
-  ...
-  maven { url 'https://jitpack.io' }
-  }
+	...
+	maven { url 'https://jitpack.io' }
+	}
 }
 ```
 Add depedency
 ```bash
 dependencies {
-  implementation 'com.github.rizmaulana:SheenValidator:0.1.2'
+	implementation 'com.github.rizmaulana:SheenValidator:0.1.1'
 }
 ```
 ## Validation Support
 1. Required / Not Empty
 2. Email
 3. Phone
-4. Webiste
+4. Website
 
 ## Usage
 ### General Usage
@@ -50,7 +52,7 @@ dependencies {
         }
     }
 ```
-You can register validation on any view which extends TextView component
+You can register validation on any view which extends **TextView component**
 
 ### Usage with Error Listener to custom Error
 
@@ -96,7 +98,7 @@ sheenValidator.setOnErrorValidatorListener { list ->
 ```
 
 ## Contributing
-Pull requests are welcome. we need more contributor for validation rule and default error language, in this version only support English and Bahasa as default error message
+Pull requests are welcome. we need more contributor for **validation** rule and default error language, in this version **only support English** as default error message
 
 ## License
 ```bash
