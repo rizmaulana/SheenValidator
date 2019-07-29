@@ -4,6 +4,9 @@ import android.content.Context
 import android.widget.TextView
 import id.rizmaulana.sheenvalidator.R
 import id.rizmaulana.sheenvalidator.utils.Helper
+import id.rizmaulana.sheenvalidator.utils.ValidationType
+import id.rizmaulana.sheenvalidator.utils.ValidationTypeAbstraction
+import id.rizmaulana.sheenvalidator.utils.type.*
 
 /**
  * rizmaulana@live.com 2019-07-18.
@@ -12,11 +15,8 @@ class SheenValidator constructor(private val context: Context) {
 
     private val TAG = javaClass::getSimpleName
 
-    private val asRequiredFormList: MutableList<TextView> = mutableListOf()
-    private val asEmailFormList: MutableList<TextView> = mutableListOf()
-    private val asPhoneFormList: MutableList<TextView> = mutableListOf()
-    private val asWebsiteFormList: MutableList<TextView> = mutableListOf()
-    private val errorFormList: MutableList<TextView> = mutableListOf()
+    private val formWithValidation: MutableList<Pair<TextView, ValidationTypeAbstraction>> = mutableListOf()
+    private val errorFormWithValidation: MutableList<Pair<TextView, ValidationTypeAbstraction>> = mutableListOf()
 
 
     private var validatorListener: ValidatorListener? = null
@@ -27,84 +27,109 @@ class SheenValidator constructor(private val context: Context) {
         this.validatorListener = validatorListener
     }
 
-    fun setOnErrorValidatorListener(errorValidatorListener: (List<TextView>) -> Unit) {
+    fun setOnErrorValidatorListener(errorValidatorListener: (List<Pair<TextView, ValidationTypeAbstraction>>) -> Unit) {
         this.showDefaultError = false
         this.errorValidatorListener = errorValidatorListener
     }
 
     fun registerAsRequired(view: TextView) {
-        if (!asRequiredFormList.contains(view)) {
-            asRequiredFormList.add(view)
-        }
+        formWithValidation.add(Pair(view, ValidationRequired()))
     }
 
     fun registerAsEmail(view: TextView) {
-        if (!asEmailFormList.contains(view)) {
-            asEmailFormList.add(view)
-        }
+        formWithValidation.add(Pair(view, ValidationEmail()))
     }
 
     fun registerAsPhone(view: TextView) {
-        if (!asPhoneFormList.contains(view)) {
-            asPhoneFormList.add(view)
-        }
+        formWithValidation.add(Pair(view, ValidationPhone()))
     }
 
     fun registerAsWebsite(view: TextView) {
-        if (!asWebsiteFormList.contains(view)) {
-            asWebsiteFormList.add(view)
-        }
+        formWithValidation.add(Pair(view, ValidationWebsite()))
     }
 
-    fun removeViewValidation(view: TextView) {
-        asRequiredFormList.remove(view)
-        asEmailFormList.remove(view)
-        asPhoneFormList.remove(view)
-        asWebsiteFormList.remove(view)
+    fun registerHasMinLength(view: TextView, minLength: Int) {
+        formWithValidation.add(Pair(view, ValidationHasMin(minLength)))
     }
+
+    fun registerHasMaxLength(view: TextView, maxLength: Int) {
+        formWithValidation.add(Pair(view, ValidationHasMax(maxLength)))
+    }
+
+    /*fun removeViewValidation(view: TextView) {
+    }*/
 
     fun validate() {
-        errorFormList.clear()
+        errorFormWithValidation.clear()
 
-        asEmailFormList.forEach {
-            if (!Helper.isEmailValid(it.text.toString())) {
-                errorFormList.add(it)
-                if (showDefaultError) {
-                    it.error = context.resources.getString(R.string.err_form_email, it.hint)
+        formWithValidation.forEach {
+            when (it.second.getType()) {
+                ValidationType.REQUIRED -> {
+                    if (it.first.text.toString().isEmpty()) {
+                        errorFormWithValidation.add(it)
+                        if (showDefaultError) {
+                            it.first.error = context.resources.getString(R.string.err_form_required, it.first.hint)
+                        }
+                    }
+                }
+                ValidationType.EMAIL -> {
+                    if (!Helper.isEmailValid(it.first.text.toString())) {
+                        errorFormWithValidation.add(it)
+                        if (showDefaultError) {
+                            it.first.error = context.resources.getString(R.string.err_form_email, it.first.hint)
+                        }
+                    }
+                }
+                ValidationType.PHONE -> {
+                    if (!Helper.isPhoneNumberValid(it.first.text.toString())) {
+                        errorFormWithValidation.add(it)
+                        if (showDefaultError) {
+                            it.first.error = context.resources.getString(R.string.err_form_phone, it.first.hint)
+                        }
+                    }
+                }
+                ValidationType.WEBSITE -> {
+                    if (!Helper.isValidWebsite(it.first.text.toString())) {
+                        errorFormWithValidation.add(it)
+                        if (showDefaultError) {
+                            it.first.error = context.resources.getString(R.string.err_form_website, it.first.hint)
+                        }
+                    }
+                }
+                ValidationType.HAS_MIN -> {
+                    val hasMinValidator = it.second as ValidationHasMin
+                    if (it.first.text.toString().length < hasMinValidator.min) {
+                        errorFormWithValidation.add(it)
+                        if (showDefaultError) {
+                            it.first.error = context.resources.getString(
+                                R.string.err_form_has_min,
+                                it.first.hint,
+                                hasMinValidator.min
+                            )
+                        }
+                    }
+
+                }
+                ValidationType.HAS_MAX -> {
+                    val hasMaxVal = it.second as ValidationHasMax
+                    if (it.first.text.toString().length > hasMaxVal.max) {
+                        errorFormWithValidation.add(it)
+                        if (showDefaultError) {
+                            it.first.error = context.resources.getString(
+                                R.string.err_form_has_min,
+                                it.first.hint,
+                                hasMaxVal.max
+                            )
+                        }
+                    }
                 }
             }
         }
-        asPhoneFormList.forEach {
-            if (!Helper.isPhoneNumberValid(it.text.toString())) {
-                errorFormList.add(it)
-                if (showDefaultError) {
-                    it.error = context.resources.getString(R.string.err_form_phone, it.hint)
-                }
-            }
-        }
 
-        asWebsiteFormList.forEach {
-            if (!Helper.isValidWebsite(it.text.toString())) {
-                errorFormList.add(it)
-                if (showDefaultError) {
-                    it.error = context.resources.getString(R.string.err_form_website, it.hint)
-                }
-            }
-        }
-
-        asRequiredFormList.forEach {
-            if (it.text.toString().isEmpty()) {
-                errorFormList.add(it)
-                if (showDefaultError) {
-                    it.error = context.resources.getString(R.string.err_form_required, it.hint)
-                }
-            }
-        }
-
-        if (errorFormList.isEmpty()) {
+        if (errorFormWithValidation.isEmpty()) {
             validatorListener?.invoke()
         } else {
-            errorValidatorListener?.invoke(errorFormList)
+            errorValidatorListener?.invoke(errorFormWithValidation)
         }
     }
 

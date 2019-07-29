@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import id.rizmaulana.sheenvalidator.lib.SheenValidator
 import kotlinx.android.synthetic.main.activity_sheen_validator.*
+import java.util.*
 
 class SheenValidatorActivity : AppCompatActivity() {
 
@@ -13,6 +14,9 @@ class SheenValidatorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sheen_validator)
+        Toast.makeText(this@SheenValidatorActivity, "${getString(R.string.message)} | Locale ${Locale.getDefault().displayLanguage}", Toast.LENGTH_SHORT)
+            .show()
+
 
         sheenValidator = SheenValidator(this)
         sheenValidator.setOnValidatorListener {
@@ -25,6 +29,7 @@ class SheenValidatorActivity : AppCompatActivity() {
         sheenValidator.registerAsEmail(txt_email)
         sheenValidator.registerAsRequired(txt_phone)
         sheenValidator.registerAsPhone(txt_phone)
+        sheenValidator.registerHasMinLength(txt_phone, 16)
         sheenValidator.registerAsRequired(txt_website)
         sheenValidator.registerAsWebsite(txt_website)
 

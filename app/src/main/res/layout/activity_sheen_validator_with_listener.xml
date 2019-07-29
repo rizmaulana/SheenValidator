@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".SheenValidatorErrorListenerActivity">
-    <androidx.appcompat.widget.Toolbar
+    <android.support.v7.widget.Toolbar
             android:background="@color/colorPrimary"
             app:titleTextColor="#FFFFFF"
             app:title="SheenValidator Error Listenner"

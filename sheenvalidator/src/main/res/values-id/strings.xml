@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SheenValidator</string>
+
+    <string name="err_form_required">%1$s harus diisi</string>
+    <string name="err_form_email">%1$s bukan format email yang valid</string>
+    <string name="err_form_phone">%1$s bukan format nomor telepon yang valid</string>
+    <string name="err_form_website">%1$s bukan format halaman web yang valid</string>
+    <string name="err_form_has_max">%1$s minimal panjang karakter adalah %2$d </string>
+    <string name="err_form_has_min">%1$s maximal panjang karakter adalah %2$d</string>
+</resources>

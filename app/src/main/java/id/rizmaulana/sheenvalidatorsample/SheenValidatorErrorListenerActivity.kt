@@ -25,7 +25,7 @@ class SheenValidatorErrorListenerActivity : AppCompatActivity() {
         }
         sheenValidator.setOnErrorValidatorListener { list ->
             list.forEach {
-                when(it.id){
+                when(it.first.id){
                     R.id.txt_username -> til_username.error = "Oops!... looks like your username is not valid"
                     R.id.txt_password -> til_password.error = "Hmm... password is required"
 

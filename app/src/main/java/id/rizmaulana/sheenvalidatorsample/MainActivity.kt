@@ -12,6 +12,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
         btn_sheenvalidator.setOnClickListener { startActivity(Intent(this, SheenValidatorActivity::class.java)) }
         btn_sheenvalidatorlistener.setOnClickListener {
             startActivity(
@@ -27,4 +29,6 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
 }
