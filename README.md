@@ -1,5 +1,7 @@
 # SheenValidator
 
+[![](https://jitpack.io/v/rizmaulana/SheenValidator.svg)](https://jitpack.io/#rizmaulana/SheenValidator)
+
 Android library to make form validation easier, it is simple and lightweight library 100% write in Kotlin
 
 ![alt text](https://i.pinimg.com/originals/1b/ef/f1/1beff152fc029b96028374dd2ab69010.png)
@@ -17,7 +19,7 @@ allprojects {
 Add depedency
 ```bash
 dependencies {
-	implementation 'com.github.rizmaulana:SheenValidator:0.1.1'
+	implementation 'com.github.rizmaulana:SheenValidator:0.2.3'
 }
 ```
 ## Validation Support
