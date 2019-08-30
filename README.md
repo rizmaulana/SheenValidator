@@ -1,7 +1,6 @@
 # SheenValidator
 
 [![](https://jitpack.io/v/rizmaulana/SheenValidator.svg)](https://jitpack.io/#rizmaulana/SheenValidator)
-![Downloads](https://jitpack.io/v/USER/PROJECT/month.svg)
 
 Android library to make form validation easier, it is simple and lightweight library 100% write in Kotlin
 
